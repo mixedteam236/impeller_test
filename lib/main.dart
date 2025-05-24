@@ -113,58 +113,59 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: FittedBox(child: Text(widget.title)),
       ),
-      body: Stack(
-        children: [
-          Center(
-            // Center is a layout widget. It takes a single child and positions it
-            // in the middle of the parent.
-            child: Column(
-              // Column is also a layout widget. It takes a list of children and
-              // arranges them vertically. By default, it sizes itself to fit its
-              // children horizontally, and tries to be as tall as its parent.
-              //
-              // Column has various properties to control how it sizes itself and
-              // how it positions its children. Here we use mainAxisAlignment to
-              // center the children vertically; the main axis here is the vertical
-              // axis because Columns are vertical (the cross axis would be
-              // horizontal).
-              //
-              // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-              // action in the IDE, or press "p" in the console), to see the
-              // wireframe for each widget.
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text('You have pushed the button this many times:'),
-                Text(
-                  '$_counter',
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-              ],
-            ),
-          ),
-
-          AnimatedCurtain(isOpen: _counter % 2 != 0),
-          DefaultTextStyle(
-            style: const TextStyle(color: Colors.orangeAccent, fontSize: 24),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Center(
+              // Center is a layout widget. It takes a single child and positions it
+              // in the middle of the parent.
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  FpsCounter(),
-                  if (_isImpellerActivated != null)
-                    Text(_isImpellerActivated! ? 'Impeller is activated' : 'Impeller is not activated'),
-                  Text('$_deviceBrand $_deviceName $_deviceModel'),
+                // Column is also a layout widget. It takes a list of children and
+                // arranges them vertically. By default, it sizes itself to fit its
+                // children horizontally, and tries to be as tall as its parent.
+                //
+                // Column has various properties to control how it sizes itself and
+                // how it positions its children. Here we use mainAxisAlignment to
+                // center the children vertically; the main axis here is the vertical
+                // axis because Columns are vertical (the cross axis would be
+                // horizontal).
+                //
+                // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
+                // action in the IDE, or press "p" in the console), to see the
+                // wireframe for each widget.
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Welcome to the show!',
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  ),
                 ],
               ),
             ),
-          ),
-        ],
+        
+            ClipRect(child: AnimatedCurtain(isOpen: _counter % 2 != 0)),
+            DefaultTextStyle(
+              style: const TextStyle(color: Colors.orangeAccent, fontSize: 24),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    FpsCounter(),
+                    if (_isImpellerActivated != null)
+                      Text(_isImpellerActivated! ? 'Impeller is activated' : 'Impeller is not activated'),
+                    Text('$_deviceBrand $_deviceName $_deviceModel'),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.chevron_right),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
@@ -176,7 +177,7 @@ Future<bool?> showImpellerActivatedDialog(BuildContext context) {
     barrierDismissible: false,
     builder: (BuildContext context) {
       return AlertDialog(
-        content: Text('Is Impeller activated\n(used only to display the correct Impeller state on the screen)'),
+        content: Text('Is Impeller activated?\n(used only to display the correct Impeller state on the screen)'),
         actions: <Widget>[
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),

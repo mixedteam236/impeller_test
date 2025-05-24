@@ -23,8 +23,8 @@ class Curtain extends StatefulWidget {
     LinearGradient? curtainGradient,
     this.child,
   })  : topSizeFactor = topSizeFactor ?? 0.3,
-        numSideCurtainWaves = numSideCurtainWaves ?? 10,
-        numTopCurtainWaves = numTopCurtainWaves ?? 11,
+        numSideCurtainWaves = numSideCurtainWaves ?? 10*2,
+        numTopCurtainWaves = numTopCurtainWaves ?? 11*2,
         curtainGradient = curtainGradient ?? _curtainGradient();
 
   @override
